@@ -49,7 +49,6 @@ class BottomButtonView: UIView {
         
         button = BottomButton(type: .custom)
         button?.setImage(UIImage(named: imageName)?.resize(size: .init(width: width * 0.4, height: width * 0.4)), for: .normal)
-//        button?.setTitle("tap", for: .normal)
         button?.translatesAutoresizingMaskIntoConstraints = false
         button?.backgroundColor = .white
         button?.layer.cornerRadius = width / 2
@@ -61,10 +60,7 @@ class BottomButtonView: UIView {
         
         addSubview(button!)
         
-        [button?.centerYAnchor.constraint(equalTo: centerYAnchor),
-        button?.centerXAnchor.constraint(equalTo: centerXAnchor),
-        button?.widthAnchor.constraint(equalToConstant: width),
-        button?.heightAnchor.constraint(equalToConstant: width)].forEach { $0?.isActive = true }
+        button?.anchor(centerY: centerYAnchor, centerX: centerXAnchor, width: width, height: width)
     }
     
     required init?(coder: NSCoder) {
