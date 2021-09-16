@@ -15,6 +15,8 @@
 		A6096A1D26F28F890064BA12 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A1C26F28F890064BA12 /* RegisterViewModel.swift */; };
 		A6096A2126F2985E0064BA12 /* Firevase-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2026F2985E0064BA12 /* Firevase-Extension.swift */; };
 		A6096A2326F2C7E40064BA12 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2226F2C7E40064BA12 /* LoginViewController.swift */; };
+		A6096A2626F2D8870064BA12 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A6096A2526F2D8870064BA12 /* PKHUD */; };
+		A6096A2926F2E2BA0064BA12 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2826F2E2BA0064BA12 /* User.swift */; };
 		A64C6D8726F1E4FB00DAFEE4 /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8626F1E4FB00DAFEE4 /* UIView-Extension.swift */; };
 		A64C6D8926F1ECAA00DAFEE4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8826F1ECAA00DAFEE4 /* CardView.swift */; };
 		A64C6D8D26F2664700DAFEE4 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8C26F2664700DAFEE4 /* UIColor-Extension.swift */; };
@@ -45,6 +47,7 @@
 		A6096A1C26F28F890064BA12 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		A6096A2026F2985E0064BA12 /* Firevase-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firevase-Extension.swift"; sourceTree = "<group>"; };
 		A6096A2226F2C7E40064BA12 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A6096A2826F2E2BA0064BA12 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A64C6D8626F1E4FB00DAFEE4 /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		A64C6D8826F1ECAA00DAFEE4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A64C6D8C26F2664700DAFEE4 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 				A6CC85B426F16B6800475AE5 /* RxRelay in Frameworks */,
 				A6CC85B226F16B6800475AE5 /* RxCocoa in Frameworks */,
 				A6CC85B026F16B6800475AE5 /* RxSwift in Frameworks */,
+				A6096A2626F2D8870064BA12 /* PKHUD in Frameworks */,
 				0B731CAE1556CBBA73C4ABE8 /* Pods_MatchingApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +123,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		A6096A2726F2E2A80064BA12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6096A2826F2E2BA0064BA12 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A6CC858526F13E0300475AE5 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +152,7 @@
 		A6CC859026F13E0300475AE5 /* MatchingApp */ = {
 			isa = PBXGroup;
 			children = (
+				A6096A2726F2E2A80064BA12 /* Models */,
 				A6096A1B26F28F710064BA12 /* ViewModel */,
 				A6CC85AB26F151FE00475AE5 /* Extensions */,
 				A6CC85A626F1467F00475AE5 /* Views */,
@@ -215,6 +228,7 @@
 				A6CC85AF26F16B6800475AE5 /* RxSwift */,
 				A6CC85B126F16B6800475AE5 /* RxCocoa */,
 				A6CC85B326F16B6800475AE5 /* RxRelay */,
+				A6096A2526F2D8870064BA12 /* PKHUD */,
 			);
 			productName = MatchingApp;
 			productReference = A6CC858E26F13E0300475AE5 /* MatchingApp.app */;
@@ -245,6 +259,7 @@
 			mainGroup = A6CC858526F13E0300475AE5;
 			packageReferences = (
 				A6CC85AE26F16B6800475AE5 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				A6096A2426F2D8870064BA12 /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = A6CC858F26F13E0300475AE5 /* Products */;
 			projectDirPath = "";
@@ -323,6 +338,7 @@
 				A64C6D8F26F26AEF00DAFEE4 /* CardInfoLabel.swift in Sources */,
 				A6CC859226F13E0300475AE5 /* AppDelegate.swift in Sources */,
 				A64C6D8726F1E4FB00DAFEE4 /* UIView-Extension.swift in Sources */,
+				A6096A2926F2E2BA0064BA12 /* User.swift in Sources */,
 				A64C6D8D26F2664700DAFEE4 /* UIColor-Extension.swift in Sources */,
 				A64C6D9126F26EBA00DAFEE4 /* UIButton-Extension.swift in Sources */,
 				A6096A1D26F28F890064BA12 /* RegisterViewModel.swift in Sources */,
@@ -529,6 +545,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A6096A2426F2D8870064BA12 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 		A6CC85AE26F16B6800475AE5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -540,6 +564,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A6096A2526F2D8870064BA12 /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6096A2426F2D8870064BA12 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
+		};
 		A6CC85AF26F16B6800475AE5 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A6CC85AE26F16B6800475AE5 /* XCRemoteSwiftPackageReference "RxSwift" */;
