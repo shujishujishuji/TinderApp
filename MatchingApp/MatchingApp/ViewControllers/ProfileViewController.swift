@@ -6,10 +6,22 @@
 //
 
 import UIKit
+import RxSwift
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
     
+    private let disposeBag = DisposeBag()
+    
+    var user: User?
     private let cellId = "cellId"
+    
+    private var name = ""
+    private var age = ""
+    private var email = ""
+    private var residence = ""
+    private var hobby = ""
+    private var introduction = ""
     
     let saveButton = UIButton(type: .system).createProfileTopButton(title: "保存")
     let logoutButton = UIButton(type: .system).createProfileTopButton(title: "ログアウト")
@@ -19,10 +31,11 @@ class ProfileViewController: UIViewController {
     
     lazy var infoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
-        cv.backgroundColor = .brown
+        cv.backgroundColor = .white
         cv.register(InfoCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         return cv
     }()
@@ -32,6 +45,27 @@ class ProfileViewController: UIViewController {
         
         
         setupLayout()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        saveButton.rx.tap
+            .asDriver()
+            .drive{ [weak self] _ in
+                
+                let dic = [
+                    "name": self?.name,
+                    "age": self?.age,
+                    "email": self?.email,
+                    "residence": self?.residence,
+                    "hobby": self?.hobby,
+                    "introduction": self?.introduction
+                ]
+                Firestore.updateUserInfo(dic: dic) {
+                    print("更新完了")
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setupLayout() {
@@ -52,6 +86,8 @@ class ProfileViewController: UIViewController {
         nameLabel.anchor(top: profileImageView.bottomAnchor, centerX: view.centerXAnchor, topPadding: 20)
         profileEditButton.anchor(top: profileImageView.topAnchor, right: profileImageView.rightAnchor, width: 60, height: 60)
         infoCollectionView.anchor(top: nameLabel.bottomAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, topPadding: 20)
+        
+        nameLabel.text = user?.name
     }
 }
 
@@ -64,20 +100,53 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = infoCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! InfoCollectionViewCell
+        cell.user = self.user
+        setupCellBindings(cell: cell)
         return cell
     }
-}
-
-class InfoCollectionViewCell: UICollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
+    private func setupCellBindings(cell: InfoCollectionViewCell) {
         
-        backgroundColor = .green
+        cell.nameTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.name = text ?? ""
+            }
+            .disposed(by: disposeBag)
+        
+        cell.ageTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.age = text ?? ""
+            }
+            .disposed(by: disposeBag)
+        
+        cell.emailTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.email = text ?? ""
+            }
+            .disposed(by: disposeBag)
+        
+        cell.residenceTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.residence = text ?? ""
+            }
+            .disposed(by: disposeBag)
+        
+        cell.hobbyTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.hobby = text ?? ""
+            }
+            .disposed(by: disposeBag)
+        
+        cell.introductionTextField.rx.text
+            .asDriver()
+            .drive{ [weak self] text in
+                self?.introduction = text ?? ""
+            }
+            .disposed(by: disposeBag)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
