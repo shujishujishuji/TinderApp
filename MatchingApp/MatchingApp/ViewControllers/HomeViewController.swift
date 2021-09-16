@@ -8,10 +8,19 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import PKHUD
+import RxCocoa
+import RxSwift
 
 class HomeViewController: UIViewController {
     
     private var user: User?
+    private var users = [User]()
+    private let disposeBag = DisposeBag()
+    
+    let topControlView = TopControlView()
+    let cardView = UIView()
+    let bottomControlView = BottomControlView()
     
     let logoutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -23,6 +32,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
+        setupBinding()
         
         // Do any additional setup after loading the view.
     }
@@ -36,8 +46,7 @@ class HomeViewController: UIViewController {
                 self.user = user
             }
         }
-        
-        
+        fetchUsers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,12 +60,25 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func fetchUsers() {
+        HUD.show(.progress)
+        Firestore.fetchUsersFromFirestore { (users) in
+            HUD.hide()
+            self.users = users
+            
+            self.users.forEach { (user) in
+                let card = CardView(user: user)
+                self.cardView.addSubview(card)
+                card.anchor(top: self.cardView.topAnchor, bottom: self.cardView.bottomAnchor, left: self.cardView.leftAnchor, right: self.cardView.rightAnchor)
+            }
+            
+            print("ユーザ情報の取得に成功")
+        }
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .white
-        
-        let topControlView = TopControlView()
-        let cardView = CardView()
-        let bottomControlView = BottomControlView()
+    
         
         let stackView = UIStackView(arrangedSubviews: [topControlView, cardView, bottomControlView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +114,15 @@ class HomeViewController: UIViewController {
         } catch {
             print("ログアウトに失敗: ", error)
         }
+    }
+    
+    private func setupBinding() {
+        topControlView.profileButton.rx.tap
+            .asDriver()
+            .drive { _ in
+                let profile = ProfileViewController()
+                self.present(profile, animated: true, completion: nil)
+            }.disposed(by: disposeBag)
     }
 
 

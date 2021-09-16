@@ -55,7 +55,7 @@ extension Firestore {
         let document = [
             "name" : name,
             "email": email,
-            "creatAt": Timestamp()
+            "createdAt": Timestamp()
         ] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid).setData(document){
@@ -72,7 +72,7 @@ extension Firestore {
     }
     
     static func fetchUserFromFirestore(uid: String, compeltion: @escaping (User?) -> Void) {
-        Firestore.firestore().collection("ures").document(uid).getDocument { (snapshot, err) in
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print("ユーザ情報の取得に失敗:", err)
                 compeltion(nil)
@@ -83,6 +83,24 @@ extension Firestore {
             let user = User.init(dic: dic)
             compeltion(user)
             
+        }
+    }
+    
+    static func fetchUsersFromFirestore(completion: @escaping ([User]) -> Void) {
+        Firestore.firestore().collection("users").getDocuments { (snapshots, err) in
+            if let err = err {
+                print("ユーザ情報の取得に失敗: ", err)
+                return
+            }
+            
+            
+            let users = snapshots?.documents.map({ (snapshot) -> User in
+                let dic = snapshot.data()
+                let user = User(dic: dic)
+                return user
+            })
+            
+            completion(users ?? [User]())
         }
     }
 }

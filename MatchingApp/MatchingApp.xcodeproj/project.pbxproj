@@ -13,10 +13,13 @@
 		A6096A1826F27AF30064BA12 /* RegisterTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A1726F27AF30064BA12 /* RegisterTitleLabel.swift */; };
 		A6096A1A26F27D580064BA12 /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A1926F27D580064BA12 /* RegisterButton.swift */; };
 		A6096A1D26F28F890064BA12 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A1C26F28F890064BA12 /* RegisterViewModel.swift */; };
-		A6096A2126F2985E0064BA12 /* Firevase-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2026F2985E0064BA12 /* Firevase-Extension.swift */; };
+		A6096A2126F2985E0064BA12 /* Firebase-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2026F2985E0064BA12 /* Firebase-Extension.swift */; };
 		A6096A2326F2C7E40064BA12 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2226F2C7E40064BA12 /* LoginViewController.swift */; };
 		A6096A2626F2D8870064BA12 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A6096A2526F2D8870064BA12 /* PKHUD */; };
 		A6096A2926F2E2BA0064BA12 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2826F2E2BA0064BA12 /* User.swift */; };
+		A6096A2B26F323790064BA12 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2A26F323790064BA12 /* ProfileViewController.swift */; };
+		A6096A2E26F325F60064BA12 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2D26F325F60064BA12 /* ProfileImageView.swift */; };
+		A6096A3026F326880064BA12 /* ProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6096A2F26F326880064BA12 /* ProfileLabel.swift */; };
 		A64C6D8726F1E4FB00DAFEE4 /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8626F1E4FB00DAFEE4 /* UIView-Extension.swift */; };
 		A64C6D8926F1ECAA00DAFEE4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8826F1ECAA00DAFEE4 /* CardView.swift */; };
 		A64C6D8D26F2664700DAFEE4 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64C6D8C26F2664700DAFEE4 /* UIColor-Extension.swift */; };
@@ -45,9 +48,12 @@
 		A6096A1726F27AF30064BA12 /* RegisterTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTitleLabel.swift; sourceTree = "<group>"; };
 		A6096A1926F27D580064BA12 /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
 		A6096A1C26F28F890064BA12 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		A6096A2026F2985E0064BA12 /* Firevase-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firevase-Extension.swift"; sourceTree = "<group>"; };
+		A6096A2026F2985E0064BA12 /* Firebase-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase-Extension.swift"; sourceTree = "<group>"; };
 		A6096A2226F2C7E40064BA12 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A6096A2826F2E2BA0064BA12 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A6096A2A26F323790064BA12 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A6096A2D26F325F60064BA12 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		A6096A2F26F326880064BA12 /* ProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLabel.swift; sourceTree = "<group>"; };
 		A64C6D8626F1E4FB00DAFEE4 /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		A64C6D8826F1ECAA00DAFEE4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A64C6D8C26F2664700DAFEE4 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
@@ -131,6 +137,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		A6096A2C26F325E10064BA12 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A6096A2D26F325F60064BA12 /* ProfileImageView.swift */,
+				A6096A2F26F326880064BA12 /* ProfileLabel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		A6CC858526F13E0300475AE5 = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +188,7 @@
 				A6CC859526F13E0300475AE5 /* HomeViewController.swift */,
 				A6096A1126F275540064BA12 /* RegisterViewController.swift */,
 				A6096A2226F2C7E40064BA12 /* LoginViewController.swift */,
+				A6096A2A26F323790064BA12 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -180,6 +196,7 @@
 		A6CC85A626F1467F00475AE5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A6096A2C26F325E10064BA12 /* Profile */,
 				A6096A1426F278D50064BA12 /* Register */,
 				A6096A1326F278BF0064BA12 /* Home */,
 			);
@@ -193,7 +210,7 @@
 				A64C6D8626F1E4FB00DAFEE4 /* UIView-Extension.swift */,
 				A64C6D8C26F2664700DAFEE4 /* UIColor-Extension.swift */,
 				A64C6D9026F26EBA00DAFEE4 /* UIButton-Extension.swift */,
-				A6096A2026F2985E0064BA12 /* Firevase-Extension.swift */,
+				A6096A2026F2985E0064BA12 /* Firebase-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -346,9 +363,12 @@
 				A6CC85A826F1469A00475AE5 /* BottomControlView.swift in Sources */,
 				A64C6D8926F1ECAA00DAFEE4 /* CardView.swift in Sources */,
 				A6096A1626F278ED0064BA12 /* RegisterTextField.swift in Sources */,
+				A6096A2E26F325F60064BA12 /* ProfileImageView.swift in Sources */,
+				A6096A3026F326880064BA12 /* ProfileLabel.swift in Sources */,
 				A6096A1226F275540064BA12 /* RegisterViewController.swift in Sources */,
 				A64C6D9326F26F6300DAFEE4 /* CardImageView.swift in Sources */,
-				A6096A2126F2985E0064BA12 /* Firevase-Extension.swift in Sources */,
+				A6096A2B26F323790064BA12 /* ProfileViewController.swift in Sources */,
+				A6096A2126F2985E0064BA12 /* Firebase-Extension.swift in Sources */,
 				A6CC85AA26F151F400475AE5 /* Uiimage-Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,10 +20,10 @@ class CardView: UIView {
     private let goodLabel = CardInfoLabel(text: "good", textColor: .rgb(red: 137, green: 223, blue: 86))
     private let nopeLabel = CardInfoLabel(text: "nope", textColor: .rgb(red: 222, green: 110, blue: 110))
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(user: User) {
+        super.init(frame: .zero)
         
-        setupLayout()
+        setupLayout(user: user)
         setupGradientLayer()
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCardView))
         self.addGestureRecognizer(panGesture)
@@ -41,13 +41,14 @@ class CardView: UIView {
     
     @objc private func panCardView(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
+        guard let view = gesture.view else { return }
         
         if gesture.state == .changed {
             
             self.handlePanChange(translation: translation)
         
         } else if gesture.state == .ended {
-            self.handlePanEnded()
+            self.handlePanEnded(view: view, translation: translation)
             }
         }
     
@@ -68,19 +69,25 @@ class CardView: UIView {
         }
     }
     
-    private func handlePanEnded() {
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.7, options: []) {
-            self.transform = .identity
-            self.layoutIfNeeded()
-            self.goodLabel.alpha = 0
-            self.nopeLabel.alpha = 0
-            
+    private func handlePanEnded(view: UIView, translation: CGPoint) {
+        
+        if translation.x <= -120 {
+            view.removeCardViewAnimation(x: -600)
+        }else if translation.x >= 120 {
+            view.removeCardViewAnimation(x: 600)
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.7, options: []) {
+                self.transform = .identity
+                self.layoutIfNeeded()
+                self.goodLabel.alpha = 0
+                self.nopeLabel.alpha = 0
+            }
         }
     }
     
 
     
-    private func setupLayout() {
+    private func setupLayout(user: User) {
         let infoVerticalSatckView = UIStackView(arrangedSubviews: [resindenceLabel, hobbyLabel, introductionLabel])
         infoVerticalSatckView.axis = .vertical
         
@@ -99,6 +106,9 @@ class CardView: UIView {
         nameLabel.anchor(bottom: baseStackView.topAnchor, left: cardImageView.leftAnchor, bottomPadding: 10, leftPadding: 20)
         goodLabel.anchor(top: cardImageView.topAnchor, left: cardImageView.leftAnchor, width: 140, height: 55, topPadding: 25, leftPadding: 20)
         nopeLabel.anchor(top: cardImageView.topAnchor, right: cardImageView.rightAnchor, width: 140, height: 55, topPadding: 25, leftPadding: 20)
+        
+        nameLabel.text = user.name
+        introductionLabel.text = user.email
     }
     
     required init?(coder: NSCoder) {
