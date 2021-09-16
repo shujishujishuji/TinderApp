@@ -8,6 +8,7 @@
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 // MARK: - Auth
 extension Auth {
@@ -120,4 +121,40 @@ extension Firestore {
         }
     }
     
+}
+
+extension Storage {
+    static func addProfileImageToStorage(image: UIImage, idc: [String: Any], completion: @escaping () -> Void) {
+        
+        guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
+        
+        let filename = NSUUID().uuidString
+        
+        let storageRef = storage().reference().child("profile_image").child(filename)
+        
+        storageRef.putData(uploadImage, metadata: nil) { (metadata, error) in
+            
+            if let err = error {
+                print("画像の保存に失敗しました。: ", err)
+                return
+            }
+            storageRef.downloadURL{ (url, error) in
+                if let err = error {
+                    print("画像の取得に失敗: ", err)
+                    return
+                }
+                
+                guard let urlString = url?.absoluteString else { return }
+                var dicWithImage = idc
+                dicWithImage["profileImageUrl"] = urlString
+                
+                Firestore.updateUserInfo(dic: dicWithImage) {
+                    completion()
+                }
+            }
+            print("画像の保存に成功しました。")
+            
+        }
+        
+    }
 }
