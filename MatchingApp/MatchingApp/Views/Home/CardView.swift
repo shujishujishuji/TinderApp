@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
@@ -13,10 +14,10 @@ class CardView: UIView {
     
     private let cardImageView = CardImageView(frame: .zero)
     private let infoButton = UIButton(type: .system).createCardButton()
-    private let nameLabel = CardInfoLabel(text: "shuji, 36", font: .systemFont(ofSize: 40, weight: .heavy))
-    private let resindenceLabel = CardInfoLabel(text: "日本、東京", font: .systemFont(ofSize: 20, weight: .regular))
-    private let hobbyLabel = CardInfoLabel(text: "落語", font: .systemFont(ofSize: 25, weight: .regular))
-    private let introductionLabel = CardInfoLabel(text: "お笑いが大好きです", font: .systemFont(ofSize: 25, weight: .regular))
+    private let nameLabel = CardInfoLabel(font: .systemFont(ofSize: 40, weight: .heavy))
+    private let resindenceLabel = CardInfoLabel(font: .systemFont(ofSize: 20, weight: .regular))
+    private let hobbyLabel = CardInfoLabel(font: .systemFont(ofSize: 25, weight: .regular))
+    private let introductionLabel = CardInfoLabel(font: .systemFont(ofSize: 25, weight: .regular))
     private let goodLabel = CardInfoLabel(text: "good", textColor: .rgb(red: 137, green: 223, blue: 86))
     private let nopeLabel = CardInfoLabel(text: "nope", textColor: .rgb(red: 222, green: 110, blue: 110))
     
@@ -108,7 +109,13 @@ class CardView: UIView {
         nopeLabel.anchor(top: cardImageView.topAnchor, right: cardImageView.rightAnchor, width: 140, height: 55, topPadding: 25, leftPadding: 20)
         
         nameLabel.text = user.name
-        introductionLabel.text = user.email
+        introductionLabel.text = user.introduction
+        hobbyLabel.text = user.hobby
+        resindenceLabel.text = user.residence
+        
+        if let url = URL(string: user.profileImageUrl) {
+            cardImageView.sd_setImage(with: url)
+        }
     }
     
     required init?(coder: NSCoder) {

@@ -15,6 +15,7 @@ import RxSwift
 class HomeViewController: UIViewController {
     
     private var user: User?
+    private var isCardAnimating = false
     private var users = [User]()
     private let disposeBag = DisposeBag()
     
@@ -22,11 +23,6 @@ class HomeViewController: UIViewController {
     let cardView = UIView()
     let bottomControlView = BottomControlView()
     
-    let logoutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("ログアウト", for: .normal)
-        return button
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +30,6 @@ class HomeViewController: UIViewController {
         setupLayout()
         setupBinding()
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +57,8 @@ class HomeViewController: UIViewController {
     
     private func fetchUsers() {
         HUD.show(.progress)
+        
+        self.users = []
         Firestore.fetchUsersFromFirestore { (users) in
             HUD.hide()
             self.users = users
@@ -86,7 +83,6 @@ class HomeViewController: UIViewController {
         
         
         self.view.addSubview(stackView)
-        self.view.addSubview(logoutButton)
         
         
         [
@@ -99,33 +95,67 @@ class HomeViewController: UIViewController {
             stackView.rightAnchor.constraint(equalTo: view.rightAnchor)]
             .forEach { $0.isActive = true }
         
-        logoutButton.anchor(bottom: view.bottomAnchor, left: view.leftAnchor, bottomPadding: 10, leftPadding: 10)
-        
-        logoutButton.addTarget(self, action: #selector(tappedLogoutButton), for: .touchUpInside)
     }
     
-    @objc private func tappedLogoutButton() {
-        do {
-            try Auth.auth().signOut()
-            let registerController = RegisterViewController()
-            let nav = UINavigationController(rootViewController: registerController)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true)
-        } catch {
-            print("ログアウトに失敗: ", error)
-        }
-    }
     
     private func setupBinding() {
         topControlView.profileButton.rx.tap
             .asDriver()
-            .drive { _ in
+            .drive { [weak self] _ in
                 let profile = ProfileViewController()
-                profile.user = self.user
-                self.present(profile, animated: true, completion: nil)
+                profile.user = self?.user
+                profile.presentationController?.delegate = self
+                self?.present(profile, animated: true, completion: nil)
             }.disposed(by: disposeBag)
+        
+        bottomControlView.reloadView.button?.rx.tap
+            .asDriver()
+            .drive { [weak self] _ in
+                self?.fetchUsers()
+            }.disposed(by: disposeBag)
+        
+        bottomControlView.nopeView.button?.rx.tap
+            .asDriver()
+            .drive { [weak self] _ in
+                guard let self = self else { return }
+                if !self.isCardAnimating {
+                    self.isCardAnimating = true
+                    self.cardView.subviews.last?.removeCardViewAnimation(x: -600, completion: {
+                        self.isCardAnimating = false
+                    })
+                }
+
+            }.disposed(by: disposeBag)
+        
+        bottomControlView.likeView.button?.rx.tap
+            .asDriver()
+            .drive { [weak self] _ in
+                guard let self = self else { return }
+                if !self.isCardAnimating {
+                    self.isCardAnimating = true
+                    self.cardView.subviews.last?.removeCardViewAnimation(x: 600, completion: {
+                        self.isCardAnimating = false
+                    })
+                }
+            }.disposed(by: disposeBag)
+
     }
 
 
 }
 
+// MARK: -UIAdaptivePresentationControllerDelegate
+extension HomeViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        if Auth.auth().currentUser == nil {
+            self.user = nil
+            self.users = []
+            
+            let registerController = RegisterViewController()
+            let nav = UINavigationController(rootViewController: registerController)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+
+    }
+}

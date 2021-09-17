@@ -40,6 +40,7 @@
 		A6CC85B026F16B6800475AE5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A6CC85AF26F16B6800475AE5 /* RxSwift */; };
 		A6CC85B226F16B6800475AE5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A6CC85B126F16B6800475AE5 /* RxCocoa */; };
 		A6CC85B426F16B6800475AE5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = A6CC85B326F16B6800475AE5 /* RxRelay */; };
+		A6F40BD126F410F500C0126E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A6F40BD026F410F500C0126E /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F40BD126F410F500C0126E /* SDWebImage in Frameworks */,
 				A6CC85B426F16B6800475AE5 /* RxRelay in Frameworks */,
 				A6CC85B226F16B6800475AE5 /* RxCocoa in Frameworks */,
 				A6CC85B026F16B6800475AE5 /* RxSwift in Frameworks */,
@@ -260,6 +262,7 @@
 				A6CC85B126F16B6800475AE5 /* RxCocoa */,
 				A6CC85B326F16B6800475AE5 /* RxRelay */,
 				A6096A2526F2D8870064BA12 /* PKHUD */,
+				A6F40BD026F410F500C0126E /* SDWebImage */,
 			);
 			productName = MatchingApp;
 			productReference = A6CC858E26F13E0300475AE5 /* MatchingApp.app */;
@@ -291,6 +294,7 @@
 			packageReferences = (
 				A6CC85AE26F16B6800475AE5 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				A6096A2426F2D8870064BA12 /* XCRemoteSwiftPackageReference "PKHUD" */,
+				A6F40BCF26F410F500C0126E /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = A6CC858F26F13E0300475AE5 /* Products */;
 			projectDirPath = "";
@@ -597,6 +601,14 @@
 				version = 6.2.0;
 			};
 		};
+		A6F40BCF26F410F500C0126E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +631,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A6CC85AE26F16B6800475AE5 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		A6F40BD026F410F500C0126E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A6F40BCF26F410F500C0126E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
